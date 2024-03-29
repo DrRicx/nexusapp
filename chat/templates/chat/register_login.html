@@ -1,0 +1,23 @@
+{% extends 'main.html' %}
+{% block content %}
+    {% if page == 'login' %}
+        <div>
+            <form action="" method="POST">
+                {% csrf_token %}
+                <label>username:</label>
+                <input type="text" name="username" placeholder="Enter username"/>
+
+                <label>Password:</label>
+                <input type="password" name="password" placeholder="Enter password"/>
+
+                <input type="submit" value="Login"/>
+            </form>
+        </div>
+    {% else %}
+        <div>
+            <p>12346</p>
+        </div>
+    {% endif %}
+
+
+{% endblock %}

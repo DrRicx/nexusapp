@@ -15,7 +15,25 @@
         </div>
     {% else %}
         <div>
-            <p>12346</p>
+            <form action="" method="POST">
+                {% csrf_token %}
+                <label>First name:</label>
+                <input type="text" name="first_name" placeholder="Enter first name"/>
+
+                <label>Middle name:</label>
+                <input type="text" name="middle_name" placeholder="Enter middle name"/>
+
+                <label>Last name:</label>
+                <input type="text" name="last_name" placeholder="Enter last name"/>
+
+                <label>Username:</label>
+                <input type="text" name="username" placeholder="Enter username"/>
+
+                <label>Password:</label>
+                <input type="password" name="password" placeholder="Enter password"/>
+
+                <button type="submit">Submit</button>
+            </form>
         </div>
     {% endif %}
 

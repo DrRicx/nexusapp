@@ -40,6 +40,29 @@ def loginPage(request):
 
 
 def registerPage(request):
+    if request.method == 'POST':
+        first_name = request.POST.get('first_name')
+        middle_name = request.POST.get('middle_name')  # Retrieve middle name field
+        last_name = request.POST.get('last_name')
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user = User.objects.create_user(
+            first_name=first_name,
+            last_name=last_name,
+            username=username
+        )
+
+        profile = Profile.objects.create(
+            user=user,
+            middle_name=middle_name
+        )
+
+        user.set_password(password)
+        user.save()
+
+        return redirect('login')
+
     return render(request, 'chat/register_login.html')
 
 

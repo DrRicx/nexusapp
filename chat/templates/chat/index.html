@@ -4,11 +4,14 @@
 <head>
     <meta charset="utf-8"/>
     <title>Chat Rooms</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
     What chat room would you like to enter?<br>
     <input id="room-name-input" type="text" size="100"><br>
     <input id="room-name-submit" type="button" value="Enter">
+
+     <input type="text" id="search" name="search" placeholder="Search Users">
 
     <script>
         document.querySelector('#room-name-input').focus();

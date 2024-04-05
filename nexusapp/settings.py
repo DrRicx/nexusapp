@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+import socket
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,8 +24,6 @@ SECRET_KEY = 'django-insecure-s5opc&2zk46qv2-ht0j8djfzyftwtslnzj0bwir*yfmrt7die$
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
-ALLOWED_HOSTS = []
 
 # Application definition
 
@@ -51,6 +50,36 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'nexusapp.urls'
+
+
+def get_local_ip():
+    """Get the local IP address of the connected Wi-Fi network."""
+    try:
+        # Create a socket
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        # Connect to a known address (Google DNS server)
+        s.connect(('8.8.8.8', 80))
+        # Get the local IP address
+        local_ip = s.getsockname()[0]
+        s.close()
+        return local_ip
+    except Exception as e:
+        # Default to localhost if unable to determine the IP dynamically
+        return '127.0.0.1'
+
+
+# Set ALLOWED_HOSTS dynamically
+ALLOWED_HOSTS = [get_local_ip(), 'localhost', '127.0.0.1']
+
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+
+SESSION_USER_KEY = '_auth_user_id'
+
+# Optionally, you can define the session cookie name (defaults to 'sessionid')
+SESSION_COOKIE_NAME = 'test'
+
+# Optionally, you can set the session expiration behavior
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 TEMPLATES = [
     {
@@ -86,14 +115,13 @@ DATABASES = {
             "NAME": "chatupdb",
         },
 
-        #"ENGINE": "django.db.backends.sqlite3",
-        #"NAME": BASE_DIR / "db.sqlite3",
-        #"TEST": {
+        # "ENGINE": "django.db.backends.sqlite3",
+        # "NAME": BASE_DIR / "db.sqlite3",
+        # "TEST": {
         #    "NAME": BASE_DIR / "db.sqlite3",
-        #},
+        # },
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators

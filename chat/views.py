@@ -1,4 +1,5 @@
 # chat/views.py
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .forms import *
@@ -13,31 +14,46 @@ def home(request):
 
 
 def index(request):
-    return render(request, "chat/index.html")
-
+    users_all = User.objects.all()
+    context={'users_all':users_all}
+    return render(request, "chat/index.html",context)
 
 def loginPage(request):
     page = 'login'
 
-    if request.method == "POST":
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        # Authenticate the user with the provided username and password
-        user = authenticate(username=username, password=password)
-
-        if user is None:
-            # Display an error message if authentication fails (invalid password)
-            messages.error(request, "Invalid Password")
-            return redirect('login')
-        else:
-            # Log in the user and redirect to the home page upon successful login
-            login(request, user)
-            return redirect('home')
-
     context = {'page': page}
 
-    return render(request, "chat/register_login.html", context)
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            # Create a new session for the user
+            request.session.create()
+            # Redirect to a success page or home page
+            return redirect('index')
+        else:
+            # Handle invalid login credentials
+            return render(request, 'chat/register_login.html', {'error': 'Invalid username or password'})
+    else:
+        # Render the login form
+        return render(request, 'chat/register_login.html', context)
 
+    # if request.method == "POST":
+    #     username = request.POST.get('username')
+    #     password = request.POST.get('password')
+    #     # Authenticate the user with the provided username and password
+    #     user = authenticate(username=username, password=password)
+    #
+    #     if user is None:
+    #         # Display an error message if authentication fails (invalid password)
+    #         messages.error(request, "Invalid Password")
+    #         return redirect('login')
+    #     else:
+    #         # Log in the user and redirect to the home page upon successful login
+    #         login(request, user)
+    #         return redirect('index')
 
 def registerPage(request):
     if request.method == 'POST':

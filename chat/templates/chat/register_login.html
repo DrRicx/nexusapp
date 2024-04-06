@@ -14,27 +14,42 @@
             </form>
         </div>
     {% else %}
-        <div>
-            <form action="" method="POST">
-                {% csrf_token %}
-                <label>First name:</label>
-                <input type="text" name="first_name" placeholder="Enter first name"/>
+      <div>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
 
-                <label>Middle name:</label>
-                <input type="text" name="middle_name" placeholder="Enter middle name"/>
+    <form action="" method="POST">
+        {% csrf_token %}
 
-                <label>Last name:</label>
-                <input type="text" name="last_name" placeholder="Enter last name"/>
+        <label for="id_username">Username:</label><br>
+        <input type="text" id="id_username" name="username"><br><br>
 
-                <label>Username:</label>
-                <input type="text" name="username" placeholder="Enter username"/>
+        <label for="id_email">Email:</label><br>
+        <input type="email" id="id_email" name="email"><br><br>
 
-                <label>Password:</label>
-                <input type="password" name="password" placeholder="Enter password"/>
+        <label for="id_gender">Gender:</label><br>
+        <select id="id_gender" name="gender">
+            <option value="MALE">Male</option>
+            <option value="FEMALE">Female</option>
+        </select><br><br>
 
-                <button type="submit">Submit</button>
-            </form>
-        </div>
+        <label for="id_student_number">Student Number:</label><br>
+        <input type="text" id="id_student_number" name="student_number"><br><br>
+
+        <label for="id_middle_name">Middle Name:</label><br>
+        <input type="text" id="id_middle_name" name="middle_name"><br><br>
+
+        <label for="id_password1">Password:</label><br>
+        <input type="password" id="id_password1" name="password1"><br><br>
+
+        <button type="submit">Register</button>
+    </form>
+</div>
     {% endif %}
 
 

@@ -2,22 +2,28 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
-# Create your models here.
-class Profile(models.Model):
+class Account(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    student_number = models.CharField(null=True, blank=True, max_length=11)
-    middle_name = models.CharField(null=True, blank=True, max_length=100)
+    gender = models.CharField(
+        max_length=6,
+        choices=[('MALE', 'male'), ('FEMALE', 'female')]
+    )
+    student_number = models.CharField(max_length=12, null=True, blank=True)
+    middle_name = models.CharField(max_length=12, null=True, blank=True)
 
     def __str__(self):
-        return f"{self.user.username} Profile"
+        return self.user.username
 
+class Channels(models.Model):
+    host = models.ForeignKey(User, on_delete=models.CASCADE)
+    channel_name = models.CharField(max_length=12, null=True, blank=True)
+    def __str__(self):
+        return self.channel_name
 
-from django.contrib.auth.models import User
-
-class UserSession(models.Model):
-    host = models.ForeignKey(User, on_delete=models.CASCADE, null = True)
-    session_key = models.CharField(max_length=40, unique=True)
-    room_name = models.CharField(max_length=100)
+class Subchannels(models.Model):
+    subchannel_root = models.ForeignKey(Channels, on_delete=models.CASCADE)
+    subchannel_name = models.CharField(max_length=12, null=True, blank=True)
+    members = models.ManyToManyField(User, related_name='members', blank=True)
 
     def __str__(self):
-        return f"{self.host.username}'s session ({self.session_key})"
+        return self.subchannel_name

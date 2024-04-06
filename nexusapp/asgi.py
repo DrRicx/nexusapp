@@ -15,6 +15,7 @@ from channels.auth import AuthMiddlewareStack
 
 from chat.routing import websocket_urlpatterns
 from django.conf import settings
+from . import settings
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "nexusapp.settings")
 

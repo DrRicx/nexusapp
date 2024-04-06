@@ -1,26 +1,23 @@
+# admin.py
+
 from django.contrib import admin
-from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
-from .models import Profile, UserSession
+from django.contrib.auth.admin import UserAdmin
+from .models import *
 
 
-class ProfileInline(admin.StackedInline):
-    model = Profile
+class AccountInline(admin.StackedInline):
+    model = Account
     can_delete = False
-    verbose_name_plural = 'Profile'
+    verbose_name_plural = 'Accounts'
 
 
-class CustomUserAdmin(UserAdmin):
-    inlines = (ProfileInline,)
+class CustomizeUserAdmin(UserAdmin):
+    inlines = (AccountInline,)
 
 
 admin.site.unregister(User)
-admin.site.register(User, CustomUserAdmin)
+admin.site.register(User, CustomizeUserAdmin)
 
-
-class ProfileAdmin(admin.ModelAdmin):
-    list_display = ['user', 'middle_name']  # Display fields in the admin list view
-
-admin.site.register(Profile, ProfileAdmin)
-
-admin.site.register(UserSession)
+admin.site.register(Channels)
+admin.site.register(Subchannels)

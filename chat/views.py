@@ -28,8 +28,11 @@ def channels(request, channel_name):
 
 def subchannels(request, channel_name, sub_channel_name):
     channel = get_object_or_404(Channels, channel_name=channel_name)
-    subchannels = Subchannels.objects.filter(subchannel_name=sub_channel_name)
-    context = {'subchannel': subchannels, 'channel_name': channel}
+    subchannel = get_object_or_404(Subchannels, subchannel_name=sub_channel_name)
+    context = {
+        'channel': channel,
+        'subchannel': subchannel,
+    }
     return render(request, 'chat/subchannel.html', context)
 
 

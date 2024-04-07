@@ -5,6 +5,7 @@ from django.conf import settings
 from channels.db import database_sync_to_async
 from django.db import close_old_connections
 
+
 class ChatConsumer(AsyncWebsocketConsumer):
     async def connect(self):
         # Close old database connections to prevent usage outside of async context
@@ -19,7 +20,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
             return
 
         # Join room group
-        self.room_name = self.scope["url_route"]["kwargs"]["room_name"]
+        self.room_name = self.scope["url_route"]["kwargs"]["subchannel_name"]
         self.room_group_name = f"chat_{self.room_name}"
 
         # Generate session key asynchronously

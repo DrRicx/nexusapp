@@ -8,6 +8,8 @@ urlpatterns = [
     path("home/", views.home, name="home"),
     path("login/", views.loginPage, name="login"),
     path("register/", views.registerPage, name="register"),
-    path("<str:channel_name>/", views.channels, name="channels"),
-    path("<str:channel_name>/<str:sub_channel_name>/", views.subchannels, name="subchannels"),
+    path("channel_form/", views.channelCreation, name="channelcreation"),
+    path("member_add/<str:sub_channel_key>", views.subchannel_member_add, name="addMembers"),
+    path("<str:channel_key>/", views.channels, name="channels"),
+    path('chat/<str:channel_key>/<str:sub_channel_key>/', views.subchannels, name='subchannels'),
 ]

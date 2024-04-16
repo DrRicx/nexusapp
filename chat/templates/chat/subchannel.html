@@ -5,6 +5,7 @@
 </head>
 <body>
 <center><h1>Hello, Welcome to my chat site! {{ request.user }}</h1></center>
+<a href="{% url 'addMembers' subchannel.id%}">Edit</a>
 <br>
 {% if request.user.is_authenticated %}
     <center> Logout the chat Page <a href="{% url 'home' %}">Logout</a></center>

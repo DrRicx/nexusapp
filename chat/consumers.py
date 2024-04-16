@@ -1,9 +1,9 @@
-import json
 from channels.generic.websocket import AsyncWebsocketConsumer
 from django.contrib.sessions.backends.db import SessionStore
 from django.conf import settings
 from channels.db import database_sync_to_async
 from django.db import close_old_connections
+import json
 
 
 class ChatConsumer(AsyncWebsocketConsumer):
@@ -11,20 +11,10 @@ class ChatConsumer(AsyncWebsocketConsumer):
         # Close old database connections to prevent usage outside of async context
         close_old_connections()
 
-        # Authenticate user and get user_id
-        self.user_id = await self.get_user_id()
-
-        if not self.user_id:
-            # Reject connection if user is not authenticated
-            await self.close()
-            return
-
         # Join room group
-        self.room_name = self.scope["url_route"]["kwargs"]["subchannel_name"]
-        self.room_group_name = f"chat_{self.room_name}"
+        self.sub_channel_name = self.scope["url_route"]["kwargs"]["subchannel_name"]
 
-        # Generate session key asynchronously
-        self.session_key = await self.generate_session_key()
+        self.room_group_name = f"_{self.sub_channel_name}"
 
         # Add the WebSocket connection to the room group
         await self.channel_layer.group_add(self.room_group_name, self.channel_name)
@@ -33,12 +23,13 @@ class ChatConsumer(AsyncWebsocketConsumer):
         await self.accept()
 
     async def disconnect(self, close_code):
+        if hasattr(self, 'room_group_name'):
+            # Leave room group if room_group_name is initialized
+            await self.channel_layer.group_discard(self.room_group_name, self.channel_name)
+
         if hasattr(self, 'session_key'):
             # Clean up session key
             await self.delete_session_key()
-
-        # Leave room group
-        await self.channel_layer.group_discard(self.room_group_name, self.channel_name)
 
     async def receive(self, text_data):
         text_data_json = json.loads(text_data)
@@ -94,15 +85,3 @@ class ChatConsumer(AsyncWebsocketConsumer):
             return self.scope["user"].id
         else:
             return None
-
-    @database_sync_to_async
-    def generate_session_key(self):
-        session = SessionStore()
-        session[settings.SESSION_USER_KEY] = self.user_id
-        session.create()
-        return session.session_key
-
-    @database_sync_to_async
-    def delete_session_key(self):
-        session = SessionStore(session_key=self.session_key)
-        session.delete()

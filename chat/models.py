@@ -17,6 +17,8 @@ class Account(models.Model):
 class Channels(models.Model):
     host = models.ForeignKey(User, on_delete=models.CASCADE)
     channel_name = models.CharField(max_length=12, null=True, blank=True)
+    channel_key = models.CharField(max_length=50, blank=False, null=False, default='123456789101')  # No default value
+
     def __str__(self):
         return self.channel_name
 

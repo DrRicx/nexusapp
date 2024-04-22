@@ -33,7 +33,7 @@
 What chat room would you like to enter?<br>
 
 {% for channel in channels %}
-    <a class="channel-link" href="#" data-channel-id="{{ channel.id }}">{{ channel.channel_name }}</a><br>
+    <a class="channel-link" href="#" data-channel-id="{{ channel.id }}">{{ channel.channel_name }}</a><a href="{% url 'deleteChannel' channel.id %}">delete</a><br>
 {% endfor %}
 <hr>
 <div id="subchannel-list">

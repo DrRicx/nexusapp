@@ -14,6 +14,7 @@ class Account(models.Model):
     def __str__(self):
         return self.user.username
 
+
 class Channels(models.Model):
     host = models.ForeignKey(User, on_delete=models.CASCADE)
     channel_name = models.CharField(max_length=12, null=True, blank=True)
@@ -22,10 +23,23 @@ class Channels(models.Model):
     def __str__(self):
         return self.channel_name
 
+
 class Subchannels(models.Model):
     subchannel_root = models.ForeignKey(Channels, on_delete=models.CASCADE)
     subchannel_name = models.CharField(max_length=12, null=True, blank=True)
-    members = models.ManyToManyField(User, related_name='members', blank=True)
+    members = models.ManyToManyField(User, through="ChannelMembership")
 
     def __str__(self):
         return self.subchannel_name
+
+
+class ChannelMembership(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    subchannel_group = models.ForeignKey(Subchannels, on_delete=models.CASCADE)
+
+    class Meta:
+        # Define a unique constraint across user and subchannel_group
+        unique_together = ('user', 'subchannel_group')
+
+    def __str__(self):
+        return f"{self.user.username} - {self.subchannel_group.subchannel_name}"

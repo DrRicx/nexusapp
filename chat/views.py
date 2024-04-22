@@ -1,6 +1,6 @@
 # chat/views.py
 from django.core.management.utils import get_random_secret_key
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -52,22 +52,6 @@ def subchannels(request, channel_key, sub_channel_key):
         'subchannel': subchannel,
     }
     return render(request, 'chat/subchannel.html', context)
-
-
-def subchannel_member_add(request, sub_channel_key):
-    subchannel = get_object_or_404(Subchannels, pk=sub_channel_key)
-    members = subchannel.members.all()
-
-    if request.method == 'POST':
-        form = MemberForm(request.POST)
-        if form.is_valid():
-            member_id = form.cleaned_data['member_id']
-            if member_id in members.values_list('id', flat=True):
-                subchannel.members.remove(member_id)
-                return redirect('channels')
-    else:
-        form = MemberForm()
-    return render(request, 'chat/member_form.html', {'form': form, 'subchannel': subchannel, 'members': members})
 
 
 def loginPage(request):
@@ -124,3 +108,37 @@ def channelCreation(request):
         )
     context = {'form': form}
     return render(request, 'chat/channel_creation.html', context)
+
+def channelDelete(request, channel_id):
+    channel = Channels.objects.get(id=channel_id)
+    if request.user != channel.host:
+        return HttpResponse("Not allowed")
+    if request.method == "POST":
+        channel.delete()
+        return redirect('index')
+    return render(request, 'chat/channel-delete.html', {'obj':channel})
+
+def addMember(request, channel_id, subchannel_id):
+    channel = get_object_or_404(Channels, id=channel_id)
+    subchannel = get_object_or_404(Subchannels, id=subchannel_id)
+    if request.method == "POST":
+        form = MemberAddtion(request.POST)
+        if form.is_valid():
+            user = form.cleaned_data['user']
+            # Check if the user is not already a member of the subchannel
+            if not ChannelMembership.objects.filter(user=user, subchannel_group=subchannel).exists():
+                # Create a new ChannelMembership object
+                ChannelMembership.objects.create(
+                    user=user,
+                    subchannel_group=subchannel
+                )
+            # Redirect or do something else
+    else:
+        form = MemberAddtion()
+    context = {
+        'channel': channel,
+        'subchannel': subchannel,
+        'form': form
+    }
+    return render(request, 'chat/add_member.html', context)
+

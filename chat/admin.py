@@ -21,3 +21,4 @@ admin.site.register(User, CustomizeUserAdmin)
 
 admin.site.register(Channels)
 admin.site.register(Subchannels)
+admin.site.register(ChannelMembership)

@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from .models import Account, Channels, Subchannels
+from .models import *
 
 class CombinedAccountCreationForm(forms.ModelForm):
     username = forms.CharField(max_length=150)
@@ -34,5 +34,7 @@ class ChannelNameForm(forms.ModelForm):
         model = Channels
         exclude = ['channel_key', 'host']
 
-class MemberForm(forms.Form):
-        member_id = forms.IntegerField(widget=forms.HiddenInput())
+class MemberAddtion(forms.ModelForm):
+    class Meta:
+        model = ChannelMembership
+        fields = "__all__"

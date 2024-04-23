@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 16, 2024 at 07:13 AM
+-- Generation Time: Apr 23, 2024 at 07:28 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.1.25
 
@@ -105,7 +105,11 @@ INSERT INTO `auth_permission` (`id`, `name`, `content_type_id`, `codename`) VALU
 (41, 'Can add subchannels', 11, 'add_subchannels'),
 (42, 'Can change subchannels', 11, 'change_subchannels'),
 (43, 'Can delete subchannels', 11, 'delete_subchannels'),
-(44, 'Can view subchannels', 11, 'view_subchannels');
+(44, 'Can view subchannels', 11, 'view_subchannels'),
+(45, 'Can add channel membership', 12, 'add_channelmembership'),
+(46, 'Can change channel membership', 12, 'change_channelmembership'),
+(47, 'Can delete channel membership', 12, 'delete_channelmembership'),
+(48, 'Can view channel membership', 12, 'view_channelmembership');
 
 -- --------------------------------------------------------
 
@@ -132,7 +136,7 @@ CREATE TABLE `auth_user` (
 --
 
 INSERT INTO `auth_user` (`id`, `password`, `last_login`, `is_superuser`, `username`, `first_name`, `last_name`, `email`, `is_staff`, `is_active`, `date_joined`) VALUES
-(1, 'pbkdf2_sha256$720000$1xNzi7SI8yrvL6MDyxK9t3$JFiBOB+iMLvrhjo+VAwYHJIEWSW7X/um+AAyExZ+rsY=', '2024-04-16 02:49:28.587500', 1, 'redbyte', '', '', '', 1, 1, '2024-04-05 12:01:32.777788'),
+(1, 'pbkdf2_sha256$720000$1xNzi7SI8yrvL6MDyxK9t3$JFiBOB+iMLvrhjo+VAwYHJIEWSW7X/um+AAyExZ+rsY=', '2024-04-22 03:05:19.923621', 1, 'redbyte', '', '', '', 1, 1, '2024-04-05 12:01:32.777788'),
 (2, 'pbkdf2_sha256$720000$MfwK7ARP4b3OhBhWdc6yzo$zQiP2HMeHpS1zlfoBr0WlebSlyqUjl92T9UTYI8coj0=', NULL, 0, 'testaccount', '', '', 'itsme@gmail.com', 0, 1, '2024-04-06 08:31:19.313962'),
 (3, 'pbkdf2_sha256$720000$JEdYhI4NoRL9ce6HNALONH$EpkAkP5Xb5IbEc7nJ6WMTBU05yEsk6zPkHaENGuRA/Y=', '2024-04-16 02:42:40.222354', 0, 'dennis', '', '', 'gamester1014@gmail.com', 0, 1, '2024-04-15 12:38:45.616226');
 
@@ -185,26 +189,43 @@ INSERT INTO `chat_account` (`id`, `gender`, `student_number`, `middle_name`, `us
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `chat_channelmembership`
+--
+
+CREATE TABLE `chat_channelmembership` (
+  `id` bigint(20) NOT NULL,
+  `subchannel_group_id` bigint(20) NOT NULL,
+  `user_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `chat_channelmembership`
+--
+
+INSERT INTO `chat_channelmembership` (`id`, `subchannel_group_id`, `user_id`) VALUES
+(1, 1, 1),
+(2, 1, 2),
+(4, 1, 3);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `chat_channels`
 --
 
 CREATE TABLE `chat_channels` (
   `id` bigint(20) NOT NULL,
   `channel_name` varchar(12) DEFAULT NULL,
-  `host_id` int(11) NOT NULL,
-  `channel_key` varchar(50) NOT NULL
+  `channel_key` varchar(50) NOT NULL,
+  `host_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `chat_channels`
 --
 
-INSERT INTO `chat_channels` (`id`, `channel_name`, `host_id`, `channel_key`) VALUES
-(1, 'Test Channel', 1, '123456789101'),
-(2, 'rwqrewqr', 2, '123456789101'),
-(3, 'test_channel', 1, '123456789101'),
-(4, 'hello', 1, '123456789101'),
-(5, 'testchannel2', 1, '123456789101');
+INSERT INTO `chat_channels` (`id`, `channel_name`, `channel_key`, `host_id`) VALUES
+(1, 'TestChannel1', '123456789101', 1);
 
 -- --------------------------------------------------------
 
@@ -223,21 +244,7 @@ CREATE TABLE `chat_subchannels` (
 --
 
 INSERT INTO `chat_subchannels` (`id`, `subchannel_name`, `subchannel_root_id`) VALUES
-(1, 'subchannel1', 1),
-(2, 'subchannel 2', 5),
-(3, 'subchannel12', 5);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `chat_subchannels_members`
---
-
-CREATE TABLE `chat_subchannels_members` (
-  `id` bigint(20) NOT NULL,
-  `subchannels_id` bigint(20) NOT NULL,
-  `user_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+(1, 'Subchannel1', 1);
 
 -- --------------------------------------------------------
 
@@ -274,7 +281,15 @@ INSERT INTO `django_admin_log` (`id`, `action_time`, `object_id`, `object_repr`,
 (11, '2024-04-13 01:25:24.609066', '1', 'subchannel1', 2, '[{\"changed\": {\"fields\": [\"Subchannel root\"]}}]', 11, 1),
 (12, '2024-04-13 01:25:29.235774', '2', 'subchannel 2', 2, '[{\"changed\": {\"fields\": [\"Subchannel root\"]}}]', 11, 1),
 (13, '2024-04-13 01:25:33.097139', '3', 'subchannel12', 2, '[{\"changed\": {\"fields\": [\"Subchannel root\"]}}]', 11, 1),
-(14, '2024-04-13 01:29:18.163814', '1', 'subchannel1', 2, '[{\"changed\": {\"fields\": [\"Subchannel root\", \"Members\"]}}]', 11, 1);
+(14, '2024-04-13 01:29:18.163814', '1', 'subchannel1', 2, '[{\"changed\": {\"fields\": [\"Subchannel root\", \"Members\"]}}]', 11, 1),
+(15, '2024-04-20 10:03:37.011859', '1', 'TestChannel1', 1, '[{\"added\": {}}]', 10, 1),
+(16, '2024-04-20 10:03:59.603146', '1', 'Subchannel1', 1, '[{\"added\": {}}]', 11, 1),
+(17, '2024-04-20 10:04:14.765255', '1', 'ChannelMembership object (1)', 1, '[{\"added\": {}}]', 12, 1),
+(18, '2024-04-20 10:04:25.007245', '2', 'ChannelMembership object (2)', 1, '[{\"added\": {}}]', 12, 1),
+(19, '2024-04-21 02:30:15.121595', '2', 'testaccount - Subchannel1', 2, '[{\"changed\": {\"fields\": [\"User\"]}}]', 12, 1),
+(20, '2024-04-21 02:49:18.978361', '3', 'testaccount - Subchannel1', 1, '[{\"added\": {}}]', 12, 1),
+(21, '2024-04-21 03:02:36.587635', '3', 'testaccount - Subchannel1', 3, '', 12, 1),
+(22, '2024-04-22 03:08:57.118704', '2', 'TestChannel2', 1, '[{\"added\": {}}]', 10, 1);
 
 -- --------------------------------------------------------
 
@@ -298,6 +313,7 @@ INSERT INTO `django_content_type` (`id`, `app_label`, `model`) VALUES
 (4, 'auth', 'permission'),
 (6, 'auth', 'user'),
 (9, 'chat', 'account'),
+(12, 'chat', 'channelmembership'),
 (10, 'chat', 'channels'),
 (1, 'chat', 'profile'),
 (11, 'chat', 'subchannels'),
@@ -314,7 +330,8 @@ INSERT INTO `django_content_type` (`id`, `app_label`, `model`) VALUES
 CREATE TABLE `django_migrations` (
   `id` bigint(20) NOT NULL,
   `app` varchar(255) NOT NULL,
-  `name` varchar(255) NOT NULL,  `applied` datetime(6) NOT NULL
+  `name` varchar(255) NOT NULL,
+  `applied` datetime(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -347,7 +364,12 @@ INSERT INTO `django_migrations` (`id`, `app`, `name`, `applied`) VALUES
 (23, 'chat', '0005_profile_groups_profile_user_permissions_and_more', '2024-04-06 04:28:09.057427'),
 (24, 'chat', '0006_account_delete_profile', '2024-04-06 08:03:22.403947'),
 (25, 'chat', '0007_channels_subchannels', '2024-04-06 09:05:24.980817'),
-(26, 'chat', '0008_channels_channel_key', '2024-04-11 13:07:32.615630');
+(26, 'chat', '0008_channels_channel_key', '2024-04-11 13:07:32.615630'),
+(27, 'chat', '0007_channels_subchannels_channelmembership', '2024-04-20 10:02:20.095469'),
+(28, 'chat', '0008_remove_subchannels_subchannel_root_and_more', '2024-04-20 10:02:20.556662'),
+(29, 'chat', '0009_subchannels_channelmembership', '2024-04-20 10:02:20.950505'),
+(30, 'chat', '0010_remove_channelmembership_channel_and_more', '2024-04-21 02:26:34.490725'),
+(31, 'chat', '0011_alter_channelmembership_unique_together', '2024-04-21 03:03:12.446596');
 
 -- --------------------------------------------------------
 
@@ -374,12 +396,15 @@ INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALU
 ('9o8ij0htn7mm772l4k3cw13o5n69ijb7', 'eyJfYXV0aF91c2VyX2lkIjoxfQ:1rtQMT:JtsrQJYUYXodb3NvnWBFfK_jcXUXVywvl0Dcb--EK_M', '2024-04-21 11:06:57.059952'),
 ('a2e0sijzmfhjq52jb7hhh5dltnkeyp9k', 'eyJfYXV0aF91c2VyX2lkIjoxfQ:1rtLKQ:Uvyilx4n1owNDAlWuCL_dk5svMksaHFNp2iSIj5YVoc', '2024-04-21 05:44:30.106663'),
 ('a6vrqywoz2l41r0puyyc4mp6ydo6n8if', '.eJxVjMsOwiAQRf-FtSEM5enSvd9AhgGkaiAp7cr479qkC93ec859sYDbWsM28hLmxM5sYqffLSI9cttBumO7dU69rcsc-a7wgw5-7Sk_L4f7d1Bx1G8tSRQDRRjnSlQaJkHZF9RGAVmbJUhbLOikrEvCG4MarfNAeZIOECV7fwDLdjcZ:1rwYmO:s7YWrPIZELBX8AuMVfgOfryQSYfj2HpE_W4WuCPeHXo', '2024-04-30 02:42:40.238021'),
+('d3su5mjczu2uy5ri11at1evt8xjobxc9', '.eJxVjEsOwiAUAO_C2hD-H5fuewby4FGpGkhKuzLe3ZJ0oduZybxJgH0rYe95DQuSK-Hk8ssipGeuQ-AD6r3R1Oq2LpGOhJ6206lhft3O9m9QoJexNV6xxIREPwulnWagk7QcNNcKTczOIvdZJT9HlJYBGqWsiEfC3WHJ5wu6RjcS:1ry7Yt:HzDY5wDAf6zwGPtKy2siJi0PWISX2o8x1DbNP5W2KYI', '2024-05-04 10:03:11.278696'),
+('f9hdse40mxdulsi1ufg693czgaxgx2sy', '.eJxVjEsOwiAUAO_C2hD-H5fuewby4FGpGkhKuzLe3ZJ0oduZybxJgH0rYe95DQuSK-Hk8ssipGeuQ-AD6r3R1Oq2LpGOhJ6206lhft3O9m9QoJexNV6xxIREPwulnWagk7QcNNcKTczOIvdZJT9HlJYBGqWsiEfC3WHJ5wu6RjcS:1ryMvW:zq-cLdtq6J7TOK4o6tLVBTSU-7m4eJBSHGSBta7f6Mw', '2024-05-05 02:27:34.115691'),
 ('ghob1h6t66qxg0512fq9elk04mzcfe8e', 'eyJfYXV0aF91c2VyX2lkIjoxfQ:1rtLNa:Bvdk7fRJsoMlGPitE_IbrQgErkkCdOZFncZ8R8KA3wg', '2024-04-21 05:47:46.730626'),
 ('hk3raxcqufllnbs0cwbcx45r2zha5uvd', 'eyJfYXV0aF91c2VyX2lkIjoxfQ:1rtLJg:3xJtWpu00jofINYR1YDZ5Rqnqh24vEaKBts8zI63ZVs', '2024-04-21 05:43:44.115507'),
 ('jgrkmyzuh2rska1e9t3ku3kenuqe4nlk', '.eJxVjEsOwiAUAO_C2hD-H5fuewby4FGpGkhKuzLe3ZJ0oduZybxJgH0rYe95DQuSK-Hk8ssipGeuQ-AD6r3R1Oq2LpGOhJ6206lhft3O9m9QoJexNV6xxIREPwulnWagk7QcNNcKTczOIvdZJT9HlJYBGqWsiEfC3WHJ5wu6RjcS:1rtksx:0PeRV_2LS0x5Zp_EvZXlyjsjqcLlNARUz-26Hkj55gA', '2024-04-22 09:01:51.452775'),
 ('joxygdsghmuxu6vs4hroifh4gp6pn5g2', '.eJxVjEsOwiAUAO_C2hD-H5fuewby4FGpGkhKuzLe3ZJ0oduZybxJgH0rYe95DQuSK-Hk8ssipGeuQ-AD6r3R1Oq2LpGOhJ6206lhft3O9m9QoJexNV6xxIREPwulnWagk7QcNNcKTczOIvdZJT9HlJYBGqWsiEfC3WHJ5wu6RjcS:1rutei:6j3KV5160Z9hPLNDVQLZFMuatzkjPpHKU_nQHOsPVn4', '2024-04-25 12:35:52.759357'),
 ('kyk8dh2111bun0hd4ki3b9chccjakeqx', '.eJxVjEsOwiAUAO_C2hD-H5fuewby4FGpGkhKuzLe3ZJ0oduZybxJgH0rYe95DQuSK-Hk8ssipGeuQ-AD6r3R1Oq2LpGOhJ6206lhft3O9m9QoJexNV6xxIREPwulnWagk7QcNNcKTczOIvdZJT9HlJYBGqWsiEfC3WHJ5wu6RjcS:1rt1Ne:lu2cc-VEUPEvwmKhbSTAXHOdFUkc5-lFMpZ9SFTEdIo', '2024-04-20 08:26:30.836174'),
 ('mdwj8r2u7sq119ywibvas5ix5uesudxo', '.eJxVjEsOwiAUAO_C2hD-H5fuewby4FGpGkhKuzLe3ZJ0oduZybxJgH0rYe95DQuSK-Hk8ssipGeuQ-AD6r3R1Oq2LpGOhJ6206lhft3O9m9QoJexNV6xxIREPwulnWagk7QcNNcKTczOIvdZJT9HlJYBGqWsiEfC3WHJ5wu6RjcS:1rvR2b:2zIT1gl46IeAQ8EfHvqGByxM6LzOBtBK7Wes1o-C9Uw', '2024-04-27 00:14:45.061871'),
+('mv4eizsnhw6zfspfco9bpyg5c8fg6jog', '.eJxVjEsOwiAUAO_C2hD-H5fuewby4FGpGkhKuzLe3ZJ0oduZybxJgH0rYe95DQuSK-Hk8ssipGeuQ-AD6r3R1Oq2LpGOhJ6206lhft3O9m9QoJexNV6xxIREPwulnWagk7QcNNcKTczOIvdZJT9HlJYBGqWsiEfC3WHJ5wu6RjcS:1ryjzb:7IYuT7AMn5k7WAMh1CGa0qNcetrFgJgcNWO4mkS9fuM', '2024-05-06 03:05:19.923621'),
 ('ntogs222b8412n0nt56m218xu0nrxxa9', '.eJxVjEsOwiAUAO_C2hD-H5fuewby4FGpGkhKuzLe3ZJ0oduZybxJgH0rYe95DQuSK-Hk8ssipGeuQ-AD6r3R1Oq2LpGOhJ6206lhft3O9m9QoJexNV6xxIREPwulnWagk7QcNNcKTczOIvdZJT9HlJYBGqWsiEfC3WHJ5wu6RjcS:1rwL8q:9ez-hFKt5DJyBO9dZpYxYilrRu12IXc7Bq5SngzmUmE', '2024-04-29 12:08:56.458697'),
 ('omjdnsisl8xcuobcob7ho3xybahif9e2', '.eJxVjEsOwiAUAO_C2hD-H5fuewby4FGpGkhKuzLe3ZJ0oduZybxJgH0rYe95DQuSK-Hk8ssipGeuQ-AD6r3R1Oq2LpGOhJ6206lhft3O9m9QoJexNV6xxIREPwulnWagk7QcNNcKTczOIvdZJT9HlJYBGqWsiEfC3WHJ5wu6RjcS:1rtPdT:UOFcRlqIgNTzIG0cXhygeEnbBr5MVUy0MvAg2dG0aBQ', '2024-04-21 10:20:27.856855'),
 ('qlzs6twcp87pwgjurak05uttueiz58jc', 'e30:1rsiGM:LS4PrgF-k6PIJpobEftF2FOl12eLnmo_ejtDGt0sjng', '2024-04-19 12:01:42.508832'),
@@ -445,6 +470,14 @@ ALTER TABLE `chat_account`
   ADD UNIQUE KEY `user_id` (`user_id`);
 
 --
+-- Indexes for table `chat_channelmembership`
+--
+ALTER TABLE `chat_channelmembership`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `chat_channelmembership_user_id_subchannel_group_id_1d86fe76_uniq` (`user_id`,`subchannel_group_id`),
+  ADD KEY `chat_channelmembersh_subchannel_group_id_dce878c0_fk_chat_subc` (`subchannel_group_id`);
+
+--
 -- Indexes for table `chat_channels`
 --
 ALTER TABLE `chat_channels`
@@ -455,15 +488,8 @@ ALTER TABLE `chat_channels`
 -- Indexes for table `chat_subchannels`
 --
 ALTER TABLE `chat_subchannels`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `chat_subchannels_members`
---
-ALTER TABLE `chat_subchannels_members`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `chat_subchannels_members_subchannels_id_user_id_741b1c54_uniq` (`subchannels_id`,`user_id`),
-  ADD KEY `chat_subchannels_members_user_id_ac4c0ca4_fk_auth_user_id` (`user_id`);
+  ADD KEY `chat_subchannels_subchannel_root_id_ec0e4db0_fk_chat_channels_id` (`subchannel_root_id`);
 
 --
 -- Indexes for table `django_admin_log`
@@ -513,7 +539,7 @@ ALTER TABLE `auth_group_permissions`
 -- AUTO_INCREMENT for table `auth_permission`
 --
 ALTER TABLE `auth_permission`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT for table `auth_user`
@@ -540,40 +566,40 @@ ALTER TABLE `chat_account`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `chat_channelmembership`
+--
+ALTER TABLE `chat_channelmembership`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `chat_channels`
 --
 ALTER TABLE `chat_channels`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `chat_subchannels`
 --
 ALTER TABLE `chat_subchannels`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT for table `chat_subchannels_members`
---
-ALTER TABLE `chat_subchannels_members`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `django_admin_log`
 --
 ALTER TABLE `django_admin_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `django_content_type`
 --
 ALTER TABLE `django_content_type`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `django_migrations`
 --
 ALTER TABLE `django_migrations`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- Constraints for dumped tables
@@ -613,17 +639,23 @@ ALTER TABLE `chat_account`
   ADD CONSTRAINT `chat_account_user_id_d6da2c33_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`);
 
 --
+-- Constraints for table `chat_channelmembership`
+--
+ALTER TABLE `chat_channelmembership`
+  ADD CONSTRAINT `chat_channelmembersh_subchannel_group_id_dce878c0_fk_chat_subc` FOREIGN KEY (`subchannel_group_id`) REFERENCES `chat_subchannels` (`id`),
+  ADD CONSTRAINT `chat_channelmembership_user_id_21da1c36_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`);
+
+--
 -- Constraints for table `chat_channels`
 --
 ALTER TABLE `chat_channels`
   ADD CONSTRAINT `chat_channels_host_id_bcd4db85_fk_auth_user_id` FOREIGN KEY (`host_id`) REFERENCES `auth_user` (`id`);
 
 --
--- Constraints for table `chat_subchannels_members`
+-- Constraints for table `chat_subchannels`
 --
-ALTER TABLE `chat_subchannels_members`
-  ADD CONSTRAINT `chat_subchannels_mem_subchannels_id_fc532d96_fk_chat_subc` FOREIGN KEY (`subchannels_id`) REFERENCES `chat_subchannels` (`id`),
-  ADD CONSTRAINT `chat_subchannels_members_user_id_ac4c0ca4_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`);
+ALTER TABLE `chat_subchannels`
+  ADD CONSTRAINT `chat_subchannels_subchannel_root_id_ec0e4db0_fk_chat_channels_id` FOREIGN KEY (`subchannel_root_id`) REFERENCES `chat_channels` (`id`);
 
 --
 -- Constraints for table `django_admin_log`

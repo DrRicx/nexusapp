@@ -142,3 +142,6 @@ def addMember(request, channel_id, subchannel_id):
     }
     return render(request, 'chat/add_member.html', context)
 
+#def deleteMember(request, channel_id, subchannel_id):
+#   channel = Channels.object.get(id=channel_id)
+#   subchannel = Subchannels.object.get(id=subchannel_id)

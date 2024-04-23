@@ -142,6 +142,10 @@ def addMember(request, channel_id, subchannel_id):
     }
     return render(request, 'chat/add_member.html', context)
 
-#def deleteMember(request, channel_id, subchannel_id):
-#   channel = Channels.object.get(id=channel_id)
-#   subchannel = Subchannels.object.get(id=subchannel_id)
+
+def deleteMember(request, channel_id, subchannel_id):
+    member = ChannelMembership.objects.get(id=channel_id)
+    if request.method == "POST":
+        member.delete()
+        return redirect('index')
+    return render(request, 'chat/channel-delete.html', {'obj': member})

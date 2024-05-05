@@ -7,20 +7,20 @@ body{
 }
 .main-container {
   position: relative;
-  max-width: 1440px;
-  height: 1024px;
+  max-width: auto;
+  height: auto;
   margin: auto; 
   overflow: hidden;
-  padding: 2rem 1rem;
+  padding: none;
   justify-content: space-between;
   align-items: center;
-  gap: 2rem;
+  gap: none;
 }
 .navbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  max-width: 1200px;
+  max-width: 1500px;
   margin: auto;
   padding: 2rem 1rem;
   gap: 2rem;
@@ -41,7 +41,7 @@ body{
   position: relative;
   width: 91px;
   height: 91px;
-  background: url(./assets/images/1fdb2678-fbfc-45d6-bbf5-8fb71b1f6d49.png)
+  background: url(images_8.jpg)
     no-repeat center;
   background-size: cover;
   z-index: 2;
@@ -162,8 +162,8 @@ body{
   height: 138px;
   color: #ffffff;
   font-family: Inter, var(--default-font-family);
-  font-size: 100px;
-  font-weight: 900;
+  font-size: 90px;
+  font-weight: 700;
   line-height: 138px;
   text-align: left;
   white-space: nowrap;
@@ -207,11 +207,15 @@ body{
   height: 89px;
   padding: 20px 140px 20px 140px;
   cursor: pointer;
-  background: #ffffff;
+  background-color: rgb(228, 228, 25);
   border: none;
   z-index: 15;
   border-radius: 39px;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
+
+
 .log-in {
   flex-shrink: 0;
   flex-basis: auto;
@@ -269,34 +273,4 @@ body{
   z-index: 10;
 }
 
-@media only screen and (max-width: 1920px)
-   {
-      
-    .main-container {
-      width: auto;
-      height: auto; 
-    }
-   
-  }
-
-  @media only screen and (max-width: 1920px)
-   {
-      
-    .navbar-links {
-      width: auto;
-      height: auto; 
-      margin: auto;
-    }
-   
-  }
-
-  @media only screen and (max-width: 1920px)
-   {
-      
-    .hero-banner-text {
-      width: auto;
-      height: auto; 
-    }
-   
-  }
 

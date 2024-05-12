@@ -1,0 +1,294 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  margin-bottom: 0%;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-image: url(Screenshot\ 2024-05-06\ 030824.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+
+}
+.main-container {
+  position: relative;
+  width: 1132px;
+  height: 769px;
+  margin: 0 auto;
+  font-size: 0px;
+}
+
+.rectangle {
+  position: relative;
+  width: 1132px;
+  height: 769px;
+  margin: 127px 0 0 154px;
+  font-size: 0px;
+  background: #1e2a42;
+  z-index: 4;
+  overflow: visible auto;
+  border-radius: 1px;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.3);
+}
+.register-account {
+  display: block;
+  position: relative;
+  height: 72px;
+  margin: 49px 0 0 356px;
+  color: #ffffff;
+  font-family: Poppins, var(--default-font-family);
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 72px;
+  text-align: left;
+  white-space: nowrap;
+  z-index: 5;
+}
+.email {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  flex-wrap: nowrap;
+  gap: 4px;
+  position: relative;
+  width: 904px;
+  margin: 17px 0 0 115px;
+  z-index: 6;
+}
+.username {
+  flex-shrink: 0;
+  flex-basis: auto;
+  position: relative;
+  height: 42px;
+  color: #ffffff;
+  font-family: Poppins, var(--default-font-family);
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 42px;
+  text-align: left;
+  white-space: nowrap;
+  z-index: 7;
+}
+.email-input-box {
+  flex-shrink: 0;
+  position: relative;
+  width: 904px;
+  height: 65px;
+  background: #fff8f8;
+  z-index: 8;
+}
+.password {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  flex-wrap: nowrap;
+  gap: 4px;
+  position: relative;
+  width: 906px;
+  margin: 17px 0 0 115px;
+  z-index: 9;
+}
+.password-label {
+  flex-shrink: 0;
+  flex-basis: auto;
+  position: relative;
+  height: 42px;
+  color: #ffffff;
+  font-family: Poppins, var(--default-font-family);
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 42px;
+  text-align: left;
+  white-space: nowrap;
+  z-index: 10;
+}
+.email-input-box-1 {
+  flex-shrink: 0;
+  position: relative;
+  width: 906px;
+  height: 65px;
+  background: #fff8f8;
+  z-index: 11;
+}
+.confirm-password {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  flex-wrap: nowrap;
+  gap: 4px;
+  position: relative;
+  width: 906px;
+  margin: 17px 0 0 115px;
+  z-index: 12;
+}
+.confirm-password-2 {
+  flex-shrink: 0;
+  flex-basis: auto;
+  position: relative;
+  height: 42px;
+  color: #ffffff;
+  font-family: Poppins, var(--default-font-family);
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 42px;
+  text-align: left;
+  white-space: nowrap;
+  z-index: 13;
+}
+.email-input-box-3 {
+  flex-shrink: 0;
+  position: relative;
+  width: 906px;
+  height: 65px;
+  background: #fff8f8;
+  z-index: 14;
+}
+.login-button-pill {
+  position: relative;
+  width: 906px;
+  height: 74px;
+  margin: 33px 0 0 115px;
+  background: #0501c5;
+  z-index: 16;
+}
+.register {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  position: absolute;
+  height: 62px;
+  top: 6px;
+  left: calc(50% - 87px);
+  color: #ffffff;
+  font-family: Poppins, var(--default-font-family);
+  font-size: 41px;
+  font-weight: 700;
+  line-height: 61.5px;
+  text-align: left;
+  white-space: nowrap;
+  z-index: 17;
+}
+.have-account-login {
+  position: relative;
+  width: 459px;
+  height: 42px;
+  margin: 12px 0 0 562px;
+  font-family: Poppins, var(--default-font-family);
+  font-size: 28px;
+  font-weight: 300;
+  line-height: 42px;
+  text-align: left;
+  text-overflow: initial;
+  white-space: nowrap;
+  z-index: 18;
+}
+.have-account {
+  position: relative;
+  color: #ffffff;
+  font-family: Poppins, var(--default-font-family);
+  font-size: 28px;
+  font-weight: 300;
+  line-height: 42px;
+  text-align: left;
+}
+.login {
+  position: relative;
+  color: #ffffff;
+  font-family: Poppins, var(--default-font-family);
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 42px;
+  text-align: left;
+}
+.terms-policy {
+  position: relative;
+  width: 763px;
+  height: 30px;
+  margin: 27px 0 0 186px;
+  font-family: Poppins, var(--default-font-family);
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 30px;
+  text-align: left;
+  text-overflow: initial;
+  white-space: nowrap;
+  z-index: 19;
+}
+.agree-terms {
+  position: relative;
+  color: #ffffff;
+  font-family: Poppins, var(--default-font-family);
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 30px;
+  text-align: left;
+}
+.service {
+  position: relative;
+  color: #0d80eb;
+  font-family: Poppins, var(--default-font-family);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 30px;
+  text-align: left;
+}
+.agree-terms-4 {
+  position: relative;
+  color: #ffffff;
+  font-family: Poppins, var(--default-font-family);
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 30px;
+  text-align: left;
+}
+.privacy-policy {
+  position: relative;
+  color: #0d81eb;
+  font-family: Poppins, var(--default-font-family);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 30px;
+  text-align: left;
+}
+.rectangle-5 {
+  position: absolute;
+  width: 1845.689px;
+  height: 2008.818px;
+  top: -697px;
+  left: -923px;
+  background: url(./assets/images/f94648a9-be2b-462e-a76c-7f456ac9d5b1.png)
+    no-repeat center;
+  background-size: cover;
+  z-index: 2;
+}
+.rectangle-6 {
+  position: absolute;
+  width: 1845.689px;
+  height: 2008.818px;
+  top: -193px;
+  left: 621px;
+  background: url(./assets/images/3d601978-1272-47d2-9353-186a1d1cc48a.png)
+    no-repeat center;
+  background-size: cover;
+  z-index: 3;
+}
+.wallpapersden {
+  position: absolute;
+  width: 1572px;
+  height: 1048px;
+  top: 0;
+  left: 0;
+  background: url(./assets/images/34f130cbf5a65d1baac60cccd8c3ff672cc78443.png)
+    no-repeat center;
+  background-size: cover;
+  z-index: 1;
+}

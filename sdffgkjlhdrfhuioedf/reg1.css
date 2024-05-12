@@ -1,0 +1,382 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-image: url(Screenshot\ 2024-05-06\ 030824.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+
+}
+.main-container {
+  position: relative;
+  width: 1132px;
+  height: 769px;
+  margin: 0 auto;
+  font-size: 0px;
+}
+.register-account {
+  display: block;
+  position: relative;
+  height: 72px;
+  margin: 49px 0 0 356px;
+  color: #ffffff;
+  font-family: Poppins, var(--default-font-family);
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 72px;
+  text-align: left;
+  white-space: nowrap;
+  z-index: 1;
+}
+.login-button {
+  position: relative;
+  width: 906px;
+  height: 74px;
+  margin: 417px 0 0 115px;
+  cursor: pointer;
+  font-size: 0px;
+  background: transparent;
+  border: none;
+  z-index: 20;
+  overflow: visible auto;
+}
+.continue {
+  display: block;
+  position: relative;
+  height: 62px;
+  margin: 6px 0 0 339px;
+  color: #ffffff;
+  font-family: Poppins, var(--default-font-family);
+  font-size: 41px;
+  font-weight: 700;
+  line-height: 61.5px;
+  text-align: left;
+  white-space: nowrap;
+  z-index: 22;
+}
+.login-button-pill {
+  position: absolute;
+  width: 906px;
+  height: 74px;
+  top: 0;
+  left: 0;
+  background: #0501c5;
+  z-index: 21;
+}
+.login-message {
+  position: relative;
+  width: 459px;
+  height: 42px;
+  margin: 12px 0 0 562px;
+  font-family: Poppins, var(--default-font-family);
+  font-size: 28px;
+  font-weight: 300;
+  line-height: 42px;
+  text-align: left;
+  text-overflow: initial;
+  white-space: nowrap;
+  z-index: 23;
+}
+.have-account {
+  position: relative;
+  color: #ffffff;
+  font-family: Poppins, var(--default-font-family);
+  font-size: 28px;
+  font-weight: 300;
+  line-height: 42px;
+  text-align: left;
+}
+.login {
+  position: relative;
+  color: #ffffff;
+  font-family: Poppins, var(--default-font-family);
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 42px;
+  text-align: left;
+}
+.terms-of-service {
+  position: relative;
+  width: 763px;
+  height: 30px;
+  margin: 27px 0 0 186px;
+  font-family: Poppins, var(--default-font-family);
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 30px;
+  text-align: left;
+  text-overflow: initial;
+  white-space: nowrap;
+  z-index: 24;
+}
+.by-registering {
+  position: relative;
+  color: #ffffff;
+  font-family: Poppins, var(--default-font-family);
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 30px;
+  text-align: left;
+}
+.terms-of-service-1 {
+  position: relative;
+  color: #0d80eb;
+  font-family: Poppins, var(--default-font-family);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 30px;
+  text-align: left;
+}
+.by-registering-2 {
+  position: relative;
+  color: #ffffff;
+  font-family: Poppins, var(--default-font-family);
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 30px;
+  text-align: left;
+}
+.privacy-policy {
+  position: relative;
+  color: #0d81eb;
+  font-family: Poppins, var(--default-font-family);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 30px;
+  text-align: left;
+}
+.rectangle {
+  position: absolute;
+  width: 1132px;
+  height: 769px;
+  top: 50%;
+  left: 50%;
+  background: #1e2a42;
+  transform: translate(-50%, -50%);
+  border-radius: 1px;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+}
+.email-input-box {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  flex-wrap: nowrap;
+  gap: 4px;
+  position: absolute;
+  width: 436px;
+  height: 111px;
+  top: 138px;
+  left: 115px;
+  z-index: 2;
+}
+.first-name {
+  flex-shrink: 0;
+  flex-basis: auto;
+  position: relative;
+  height: 42px;
+  color: #ffffff;
+  font-family: Poppins, var(--default-font-family);
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 42px;
+  text-align: left;
+  white-space: nowrap;
+  z-index: 3;
+}
+.email-input-box-3 {
+  flex-shrink: 0;
+  position: relative;
+  width: 436px;
+  height: 65px;
+  background: #fff8f8;
+  z-index: 4;
+}
+.email {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  flex-wrap: nowrap;
+  gap: 4px;
+  position: absolute;
+  width: 436px;
+  height: 111px;
+  top: 138px;
+  left: 585px;
+  z-index: 5;
+}
+.student-number {
+  flex-shrink: 0;
+  flex-basis: auto;
+  position: relative;
+  height: 42px;
+  color: #ffffff;
+  font-family: Poppins, var(--default-font-family);
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 42px;
+  text-align: left;
+  white-space: nowrap;
+  z-index: 6;
+}
+.email-input-box-4 {
+  flex-shrink: 0;
+  position: relative;
+  width: 436px;
+  height: 65px;
+  background: #fff8f8;
+  z-index: 7;
+}
+.email-5 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  flex-wrap: nowrap;
+  gap: 4px;
+  position: absolute;
+  width: 436px;
+  height: 111px;
+  top: 266px;
+  left: 585px;
+  z-index: 8;
+}
+.email-input-box-6 {
+  flex-shrink: 0;
+  flex-basis: auto;
+  position: relative;
+  height: 42px;
+  color: #ffffff;
+  font-family: Poppins, var(--default-font-family);
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 42px;
+  text-align: left;
+  white-space: nowrap;
+  z-index: 9;
+}
+.email-7 {
+  flex-shrink: 0;
+  position: relative;
+  width: 436px;
+  height: 65px;
+  background: #fff8f8;
+  z-index: 10;
+}
+.email-8 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  flex-wrap: nowrap;
+  gap: 4px;
+  position: absolute;
+  width: 436px;
+  height: 111px;
+  top: 266px;
+  left: 115px;
+  z-index: 14;
+}
+.middle-name-input-box {
+  flex-shrink: 0;
+  flex-basis: auto;
+  position: relative;
+  height: 42px;
+  color: #ffffff;
+  font-family: Poppins, var(--default-font-family);
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 42px;
+  text-align: left;
+  white-space: nowrap;
+  z-index: 15;
+}
+.middle-name {
+  flex-shrink: 0;
+  position: relative;
+  width: 436px;
+  height: 65px;
+  background: #fff8f8;
+  z-index: 16;
+}
+.middle-name-9 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+  position: absolute;
+  width: 436px;
+  height: 107px;
+  top: 390px;
+  left: 585px;
+  z-index: 11;
+}
+.birthdate {
+  flex-shrink: 0;
+  flex-basis: auto;
+  position: relative;
+  height: 42px;
+  color: #ffffff;
+  font-family: Poppins, var(--default-font-family);
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 42px;
+  text-align: left;
+  white-space: nowrap;
+  z-index: 12;
+}
+.group-a {
+  flex-shrink: 0;
+  position: relative;
+  width: 436px;
+  height: 65px;
+  background: url(./assets/images/e5765d55-de5f-4ae1-9cf4-6716051b2b77.png)
+    no-repeat center;
+  background-size: cover;
+  z-index: 13;
+}
+.email-b {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  flex-wrap: nowrap;
+  gap: 4px;
+  position: absolute;
+  width: 436px;
+  height: 103px;
+  top: 394px;
+  left: 115px;
+  z-index: 17;
+}
+.last-name {
+  flex-shrink: 0;
+  flex-basis: auto;
+  position: relative;
+  height: 34px;
+  color: #ffffff;
+  font-family: Inter, var(--default-font-family);
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 33.886px;
+  text-align: left;
+  white-space: nowrap;
+  z-index: 18;
+}
+.email-input-box-c {
+  flex-shrink: 0;
+  position: relative;
+  width: 436px;
+  height: 65px;
+  background: #fff8f8;
+  z-index: 19;
+}

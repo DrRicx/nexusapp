@@ -1,0 +1,233 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+}
+
+body{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: url(Screenshot\ 2024-05-06\ 030824.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.main-container {
+  position: relative;
+  width: 1440px;
+  height: 1024px;
+  margin: 0 auto;
+ 
+  overflow: hidden;
+}
+.rectangle {
+  position: relative;
+  width: 1200px;
+  height: 652px;
+  margin: 186px 0 0 120px;
+  background: #1e2a42;
+  z-index: 2;
+  border-radius: 1px;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+}
+
+.flex-column {
+  position: absolute;
+  width: 569px;
+  height: 553px;
+  top: 64px;
+  left: 68px;
+  font-size: 0px;
+  z-index: 13;
+}
+.welcome-back {
+  display: block;
+  position: relative;
+  height: 86px;
+  margin: 0 0 0 0;
+  color: #ffffff;
+  font-family: Poppins, var(--default-font-family);
+  font-size: 57px;
+  font-weight: 700;
+  line-height: 85.5px;
+  text-align: left;
+  white-space: nowrap;
+  z-index: 3;
+}
+.password-input {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  flex-wrap: nowrap;
+  gap: 4px;
+  position: relative;
+  width: 569px;
+  margin: 10px 0 0 0;
+  z-index: 8;
+}
+.email {
+  flex-shrink: 0;
+  flex-basis: auto;
+  position: relative;
+  height: 42px;
+  color: #ffffff;
+  font-family: Poppins, var(--default-font-family);
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 42px;
+  text-align: left;
+  white-space: nowrap;
+  z-index: 9;
+}
+.password-input-box {
+  flex-shrink: 0;
+  position: relative;
+  width: 569px;
+  height: 65px;
+  background: #fff8f8;
+  z-index: 10;
+}
+.password {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  flex-wrap: nowrap;
+  gap: 4px;
+  position: relative;
+  width: 569px;
+  margin: 15px 0 0 0;
+  z-index: 4;
+}
+.password-label {
+  flex-shrink: 0;
+  position: relative;
+  width: 161px;
+  font-family: Poppins, var(--default-font-family);
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 42px;
+  text-align: left;
+  text-overflow: initial;
+  white-space: nowrap;
+  z-index: 5;
+}
+.password-input-1 {
+  position: relative;
+  color: #ffffff;
+  font-family: Poppins, var(--default-font-family);
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 42px;
+  text-align: left;
+}
+.colon {
+  position: relative;
+  color: #000000;
+  font-family: Poppins, var(--default-font-family);
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 42px;
+  text-align: left;
+}
+.password-box {
+  flex-shrink: 0;
+  position: relative;
+  width: 569px;
+  height: 65px;
+  background: #fff8f8;
+  z-index: 6;
+}
+.forgot-password {
+  flex-shrink: 0;
+  flex-basis: auto;
+  position: relative;
+  height: 42px;
+  color: #3579ff;
+  font-family: Poppins, var(--default-font-family);
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 42px;
+  text-align: left;
+  white-space: nowrap;
+  z-index: 7;
+}
+.login-button {
+  position: relative;
+  width: 569px;
+  height: 74px;
+  margin: 33px 0 0 0;
+  background: #0501c5;
+  z-index: 13;
+}
+.login-2 {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  position: absolute;
+  height: 62px;
+  top: 6px;
+  left: 222px;
+  color: #ffffff;
+  font-family: Poppins, var(--default-font-family);
+  font-size: 41px;
+  font-weight: 600;
+  line-height: 61.5px;
+  text-align: left;
+  white-space: nowrap;
+  z-index: 14;
+}
+.register {
+  position: relative;
+  width: 467px;
+  height: 42px;
+  margin: 25px 0 0 102px;
+  font-family: Poppins, var(--default-font-family);
+  font-size: 28px;
+  font-weight: 300;
+  line-height: 42px;
+  text-align: left;
+  text-overflow: initial;
+  white-space: nowrap;
+  z-index: 11;
+}
+.dont-have-account {
+  position: relative;
+  color: #ffffff;
+  font-family: Poppins, var(--default-font-family);
+  font-size: 28px;
+  font-weight: 300;
+  line-height: 42px;
+  text-align: left;
+}
+.register-3 {
+  position: relative;
+  color: #ffffff;
+  font-family: Poppins, var(--default-font-family);
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 42px;
+  text-align: left;
+}
+.rectangle-4 {
+  position: absolute;
+  width: 1845.689px;
+  height: 2008.818px;
+  top: -291px;
+  left: 294px;
+
+  z-index: 1;
+}
+.wallpapersden {
+  position: absolute;
+  width: 1572px;
+  height: 1048px;
+  top: -24px;
+  left: -48px;
+  
+}

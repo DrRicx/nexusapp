@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="admindes.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Admin Dashboard</h2>
+        <nav>
+            <ul>
+                <li><a href="#server-management" onclick="showSection('server-management')">Server Management</a></li>
+                <li><a href="#user-management" onclick="showSection('user-management')">User Management</a></li>
+                <li><a href="#subchannel-management" onclick="showSection('subchannel-management')">SubChannel Management</a></li>
+                <li><a href="#usage-graphs" onclick="showSection('usage-graphs')">Usage Graphs</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class="main-content">
+        <header>
+            <h1>Admin Dashboard</h1>
+        </header>
+        <main>
+            <section id="server-management" class="content-section">
+                <h2>Server Management</h2>
+                <input type="text" id="server-name" placeholder="Server Name">
+                <button onclick="addServer()">Add Server</button>
+                <input type="text" id="server-id-delete" placeholder="Server ID">
+                <button onclick="deleteServer()">Delete Server</button>
+            </section>
+            <section id="user-management" class="content-section">
+                <h2>User Management</h2>
+                <input type="text" id="username" placeholder="Username">
+                <input type="email" id="email" placeholder="Email">
+                <button onclick="addUser()">Add User</button>
+                <input type="text" id="user-id-delete" placeholder="User ID">
+                <button onclick="deleteUser()">Delete User</button>
+            </section>
+            <section id="subchannel-management" class="content-section">
+                <h2>SubChannel Management</h2>
+                <input type="text" id="subchannel-name" placeholder="SubChannel Name">
+                <input type="text" id="server-id" placeholder="Server ID">
+                <button onclick="addSubChannel()">Add SubChannel</button>
+                <input type="text" id="subchannel-id-delete" placeholder="SubChannel ID">
+                <button onclick="deleteSubChannel()">Delete SubChannel</button>
+            </section>
+            <section id="usage-graphs" class="content-section">
+                <h2>Usage Graphs</h2>
+                <canvas id="serverUsageChart"></canvas>
+                <canvas id="userGrowthChart"></canvas>
+            </section>
+        </main>
+    </div>
+    <script src="harurut.js"></script>
+</body>
+</html>
